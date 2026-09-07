@@ -16,10 +16,8 @@ fail() { printf '\033[1;31m%s\033[0m\n' "$*" >&2; exit 1; }
 usage() {
     cat <<'EOF'
 Usage:
-  wget -qO- https://raw.githubusercontent.com/ZinhoYip/ulzix-mtproto-scripts/main/install.sh | sh
   wget -qO- https://raw.githubusercontent.com/ZinhoYip/ulzix-mtproto-scripts/main/install.sh | sh -s -- 54319
 
-The first form asks for the provider's public port. The second form is non-interactive.
 The provider must map PUBLIC_PORT -> 8443 before running this installer.
 Environment variables: PUBLIC_PORT, PUBLIC_IP, LISTEN_PORT, TLS_DOMAIN, REGENERATE_SECRET.
 EOF

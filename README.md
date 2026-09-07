@@ -18,17 +18,13 @@
 
 ## 一条命令部署
 
-交互式输入公网端口：
-
-```sh
-wget -qO- https://raw.githubusercontent.com/ZinhoYip/ulzix-mtproto-scripts/main/install.sh | sh
-```
-
-直接传入公网端口，不需要交互：
+直接传入公网端口，一条命令完成部署：
 
 ```sh
 wget -qO- https://raw.githubusercontent.com/ZinhoYip/ulzix-mtproto-scripts/main/install.sh | sh -s -- 54319
 ```
+
+将 `54319` 改成服务商实际分配的公网端口。由于公网端口映射配置在服务商面板中，VPS 内的脚本无法自动知道这个端口，因此必须通过参数或环境变量传入。
 
 脚本会自动：
 
@@ -46,22 +42,22 @@ Secret 保存在 `/home/mtproxy/mtg.secret`，重复执行脚本时默认复用�
 ## 非默认配置
 
 ```sh
-PUBLIC_PORT=54319 TLS_DOMAIN=cloudflare.com \
-  wget -qO- https://raw.githubusercontent.com/ZinhoYip/ulzix-mtproto-scripts/main/install.sh | sh
+TLS_DOMAIN=cloudflare.com \
+  wget -qO- https://raw.githubusercontent.com/ZinhoYip/ulzix-mtproto-scripts/main/install.sh | PUBLIC_PORT=54319 sh
 ```
 
 无法自动获取公网 IP 时：
 
 ```sh
-PUBLIC_IP=156.245.244.165 PUBLIC_PORT=54319 \
-  wget -qO- https://raw.githubusercontent.com/ZinhoYip/ulzix-mtproto-scripts/main/install.sh | sh
+PUBLIC_IP=156.245.244.165 \
+  wget -qO- https://raw.githubusercontent.com/ZinhoYip/ulzix-mtproto-scripts/main/install.sh | sh -s -- 54319
 ```
 
 重新生成 Secret：
 
 ```sh
-REGENERATE_SECRET=1 PUBLIC_PORT=54319 \
-  wget -qO- https://raw.githubusercontent.com/ZinhoYip/ulzix-mtproto-scripts/main/install.sh | sh
+REGENERATE_SECRET=1 \
+  wget -qO- https://raw.githubusercontent.com/ZinhoYip/ulzix-mtproto-scripts/main/install.sh | sh -s -- 54319
 ```
 
 ## 常用检查
